@@ -45,7 +45,7 @@ The following is a visualization for the mean and standard deviation of the aver
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/kNNGenrePredictor.png "Jaccard index of k-NN runs")
 
-The Jaccard index never reaches 1 even for best case. Moreover, it's strange that a k-NN with only 1 nearest neighbor performed the best. Below is the distribution of Jaccard indices for one run of the k-NN where k=1 was used to test about 1000 testing points. 
+The average Jaccard index for a k-NN run never reaches 1 even for best case. Moreover, it's strange that a k-NN with only 1 nearest neighbor performed the best. Below is the distribution of Jaccard indices for one run of the k-NN where k=1 was used to test about 1000 testing points. 
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/JaccIndxHistforK_1.png "Jaccard index distribution for one run of k-NN with k=1")
 
