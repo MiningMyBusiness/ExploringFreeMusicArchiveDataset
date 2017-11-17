@@ -14,7 +14,7 @@ I performed analysis on the following aspects of the data.
 
 1. The feature set ---- 106,574 tracks with 518 features extracted for each track. 
 2. The genre labels ---- Each track is labeled with one or more genres, for a total 163 genres.
-3. The number of listens ---- Each track is labeled with a integer number of listens, providing data for track popularity.
+3. The number of listens ---- Each track is labeled with a integer number of listens, providing data for the popularity of the track.
 
 ## Data exploration
 Initially, I wanted to predict the genre of a song given its audio features so I started by visualizing the distribution of genres in the data set. Below are the top ten genres in the dataset. Keep in mind that one song can have more than one genre. 
