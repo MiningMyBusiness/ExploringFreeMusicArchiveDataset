@@ -41,7 +41,7 @@ For k-NN runs with more than 1 neighbor, I used a simple "voting" mechanism with
 2. If the multi-label prediction is partially correct, the the intersection is smaller than the union of the predicted and actual labels. In this case 0 < Jaccard Index < 1.
 3. The multi-label prediction is totally wrong and the intersection is 0 making the Jaccard index = 0. 
 
-The following is a visualization for the average and standard deviation of Jaccard indices for mulitple runs of k-NN for which the training and testing sets were randomized. 
+The following is a visualization for the mean and standard deviation of the average Jaccard indices for mulitple runs of k-NN for which the training and testing sets were randomized. 
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/kNNGenrePredictor.png "Jaccard index of k-NN runs")
 
