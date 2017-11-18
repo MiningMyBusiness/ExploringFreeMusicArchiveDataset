@@ -16,7 +16,7 @@ I performed analysis on the following aspects of the data.
 2. The genre labels ---- Each track is labeled with one or more genres, for a total 163 genres.
 3. The number of listens ---- Each track is labeled with a integer number of listens, providing data for the popularity of the track.
 
-## Data exploration
+## Music genre prediction 
 Initially, I wanted to predict the genre of a song given its audio features so I started by visualizing the distribution of genres in the data set. Below are the top ten genres in the dataset. Keep in mind that one song can have more than one genre. 
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/topTenGenres.png "Top ten genres")
@@ -32,7 +32,7 @@ It seems that some genres occur far more often than others in this dataset.
 
 The large majority of genres occur less than 2,000 times in the dataset while there are two genres that occur more than 20,000 times. Training a predictor on data like this will be difficult since there will be a lot of class imbalance. Additionally, this classification problem has more than two classes (genres) for all data and more than two labels (genres) for each song making it a multi-class, multi-label classification task. 
 
-## Genre classification with k-nearest neighbor
+### Genre classification with k-nearest neighbor
 The beyond-human interpretable number of dimensions in the feature set makes it unclear if the feature space can accurately predict the genre of a song over a random guess. Therefore, I started with a simple k-nearest neighbor (k-NN) approach which is non-parametric and can reveal if the features-space has some mapping to the label-space. This was implemented with the help of the tensorflow library to speed up processing time (found in the [Code](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Code) folder).
 
 For k-NN runs with more than 1 neighbor, I used a simple "voting" mechanism with majority rule. Neighbors (training data) vote which genre labels to apply to the new point (testing data). Genres with 50% or more of the votes are predicted as labels for the test point. I used the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index) as the accuracy metric. The Jaccard index is commonly used to measure accuracy for multi-label problems and is calculated by dividing the number of elements in intersection of the predicted and actual labels by the number of elements in the union of the predicted and actual labels. The Jaccard index breaks down in the following way:
@@ -49,8 +49,25 @@ The average Jaccard index for a k-NN run never reaches 1 even for best case. Mor
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/JaccIndxHistforK_1.png "Jaccard index distribution for one run of k-NN with k=1")
 
-The k-NN method of genre prediction gets at least one of the labels right about 40% of the time. However, it gets all of the labels wrong about 60% of the time. This is still far better than random guessing considering there are 163 labels but maybe this performance can be increased. 
+The k-NN method of genre prediction gets at least one of the labels right about 40% of the time. However, it gets all of the labels wrong about 60% of the time. This is still far better than random guessing considering there are 163 labels but maybe this performance can be increased.
 
-## Reducing the feature and label space 
+### Reducing the feature-space 
+Before I attempted to improve the performance of the genre classification, I wanted to reduce the dimensionality of the feature space down from 518 dimensions to improve processing time. I performed [principal component analysis (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis) to find that about 155 principal components explained some 90% of the variance in the dataset of features. 
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/PCASongFeatures.png "PCA analysis of audio features")
+
+This suggested that I would lose minimal information in the feature dataset and still be able to reduce the dimensionality almost five-fold. I performed the dimensionality reduction shrinking the original feature set of 106,574 by 518 to 106,574 by 155. I did k-NN classification of genres in this reduced feature-space to make sure that the transformation and information loss did not significantly change the mapping from the feature-space to the label-space. 
+
+k-NN with reduced dimensional feature-space. 
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/kNNGenrePredictor_featDimReduce.png "k-NN with reduced dimensional features")
+
+We can see that the Jaccard index didn't change appreciable between the two cases. This lack of change suggests that the dimensionality reduction of the feature-space did not influence the ability to correctly classify the genre.
+
+### Topic modelling the genre-space
+Reducing the dimensionality of the genre-space may help in increasing the Jaccard index. One approach to do so is by using [topic modeling](https://en.wikipedia.org/wiki/Topic_model) techniques since the genre space is binary (a song either belongs to a genre or not). The most common methods of topic modeling include [Latent Semantic Indexing (LSI)](https://en.wikipedia.org/wiki/Latent_semantic_analysis#Latent_semantic_indexing) or [Latent Dirichlet Allocation (LDA)](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation). Both can be used to group words (or genres) into topics (or genre groups) based how often they occur with each other. 
+
+However, each method has major differences. LSI is akin to PCA and is faster than LDA. LDA is Bayesian update method that must go through the data many times (number of passes) to produce results. While the results genrated by LDA are more human-interpretable than those generated by LSI, LSI allows for a visualization of the dimensionality of the binary label-space. I performed LSI on the genre labels to see how many genre groups were needed to capture most of the variance the genre-space. 
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/LSASongGernes_VarExpl.png "Latent semantic analysis (indexing) of song genres")
 
 Repo under construction. 
