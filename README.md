@@ -49,7 +49,7 @@ The average Jaccard index for a k-NN run never reaches 1 even for best case. Mor
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/JaccIndxHistforK_1.png "Jaccard index distribution for one run of k-NN with k=1")
 
-The k-NN method of genre prediction gets at least one of the labels right about 40% of the time. However, it gets all of the labels wrong about 60% of the time. This is still far better than random guessing considering there are 163 labels but maybe this performance can be increased.
+The k-NN method of genre prediction gets at least one of the labels right about 40% of the time. However, it gets all of the labels wrong about 60% of the time. This is still far better than random guessing considering there are 163 labels but maybe this performance can be increased. I also used a Random Forest classifier which performed far worse than k-NN. 
 
 ### Reducing the feature-space 
 Before I attempted to improve the performance of the genre classification, I wanted to reduce the dimensionality of the feature space down from 518 dimensions to improve processing time. I performed [principal component analysis (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis) to find that about 155 principal components explained some 90% of the variance in the dataset of features. 
