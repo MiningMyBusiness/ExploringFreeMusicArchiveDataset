@@ -70,4 +70,52 @@ However, each method has major differences. LSI is akin to PCA and is faster tha
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/LSASongGernes_VarExpl.png "Latent semantic analysis (indexing) of song genres")
 
+There is no clear "elbow" in the plot above suggesting that there may not be any inherent dimensionality in the genre-space from this dataset. This result is unsurprising since about 80 of the genres appear less than 1,000 times in a dataset with over 100,000 samples. It does seem that 70 topics from the LSI model can capture about 80% of the information in the genre space. 
+
+However the topics in LSI are difficult to interpret. Below are the first four topics extracted by LSI. They are listed in order of "importance" in the dataset. 
+
+1. '0.628*"Experimental" + 0.496*"Electronic" + 0.375*"Rock" + '
+  '0.208*"Instrumental" + 0.144*"Avant-Garde" + 0.143*"Pop" + 0.130*"Noise" + '
+  '0.119*"Ambient" + 0.106*"Folk" + 0.104*"Electroacoustic"'),
+  
+2. '-0.766*"Rock" + 0.276*"Electronic" + 0.269*"Experimental" + -0.262*"Punk" + '
+  '-0.184*"Pop" + -0.158*"Lo-Fi" + -0.147*"Indie-Rock" + 0.132*"Instrumental" '
+  '+ -0.118*"Folk" + -0.099*"Garage"'),
+
+3. '0.699*"Electronic" + -0.546*"Experimental" + -0.236*"Avant-Garde" + '
+  '-0.128*"Electroacoustic" + 0.120*"Ambient Electronic" + -0.109*"Improv" + '
+  '-0.108*"Noise" + 0.107*"Instrumental" + 0.106*"Hip-Hop" + 0.103*"Pop"'),
+
+4. '-0.684*"Instrumental" + -0.357*"Ambient" + -0.322*"Soundtrack" + '
+  '-0.257*"Folk" + 0.254*"Electronic" + -0.221*"Pop" + 0.148*"Experimental" + '
+  '-0.143*"Experimental Pop" + -0.092*"Singer-Songwriter" + 0.092*"Punk"')
+
+Notice that a single genre appears in more than one topic. Sometimes this makes sense. For instance, "Rock" appears in the first topic with a positive weigth and in the second topic with a negative weight. However, this seems mostly to differentiate between Experimental and Electronic music that can and cannot be considered Rock, since both of these genres have positive ratings in the first two topics. 
+
+To make the results more interpretable I also performed LDA with a preset of 70 topics. These are 5 random topics from LDA. Notice that all weights on genres are positive making the composition of these topics easier to understand. 
+
+1. '0.548*"Free-Folk" + 0.422*"Folk" + 0.029*"Experimental" + 0.000*"Big '
+  'Band/Swing" + 0.000*"Lounge" + 0.000*"South Indian Traditional" + '
+  '0.000*"Thrash" + 0.000*"Black-Metal" + 0.000*"Drum & Bass" + 0.000*"Goth"'),
+
+2. '0.564*"Avant-Garde" + 0.304*"Experimental" + 0.053*"New Wave" + '
+  '0.043*"Progressive" + 0.035*"Rock" + 0.000*"Black-Metal" + 0.000*"Big '
+  'Band/Swing" + 0.000*"Lounge" + 0.000*"Goth" + 0.000*"Drum & Bass"'),
+
+3. '0.609*"Drone" + 0.391*"Experimental" + 0.000*"20th Century Classical" + '
+  '0.000*"Drum & Bass" + 0.000*"Lounge" + 0.000*"Goth" + 0.000*"Black-Metal" + '
+  '0.000*"Big Band/Swing" + 0.000*"South Indian Traditional" + '
+  '0.000*"Shoegaze"'),
+
+4. '0.818*"Blues" + 0.162*"Rock" + 0.019*"Gospel" + 0.000*"Big Band/Swing" + '
+  '0.000*"Shoegaze" + 0.000*"Rap" + 0.000*"Drum & Bass" + 0.000*"Lounge" + '
+  '0.000*"Goth" + 0.000*"Black-Metal"'),
+
+5. '0.490*"Ambient Electronic" + 0.359*"Electronic" + 0.151*"Experimental" + '
+  '0.000*"South Indian Traditional" + 0.000*"Rap" + 0.000*"Drum & Bass" + '
+  '0.000*"Lounge" + 0.000*"Goth" + 0.000*"Black-Metal" + 0.000*"Big '
+  'Band/Swing"')]
+  
+Since these topics are much more interpretable and LDA categorizes songs into fewer topics, I compressed the genre-space from 164 genres to 70 topics learned with LDA. 
+
 Repo under construction. 
