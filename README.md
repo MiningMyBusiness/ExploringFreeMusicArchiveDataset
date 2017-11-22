@@ -114,7 +114,7 @@ To make the results more interpretable I also performed LDA with a preset of 70 
 5. '0.490*"Ambient Electronic" + 0.359*"Electronic" + 0.151*"Experimental" + '
   '0.000*"South Indian Traditional" + 0.000*"Rap" + 0.000*"Drum & Bass" + '
   '0.000*"Lounge" + 0.000*"Goth" + 0.000*"Black-Metal" + 0.000*"Big '
-  'Band/Swing"')]
+  'Band/Swing"')
   
 Since these topics are much more interpretable and LDA categorizes songs into fewer topics, I compressed the genre-space from 164 genres to 70 topics learned with LDA. 
 
