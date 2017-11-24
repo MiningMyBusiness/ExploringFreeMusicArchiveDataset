@@ -118,6 +118,10 @@ To make the results more interpretable I also performed LDA with a preset of 70 
   
 Since these topics are much more interpretable and LDA categorizes songs into fewer topics, I compressed the genre-space from 164 genres to 70 topics learned with LDA. Then I attempted k-NN prediction of topics for each song with the reduced dimensional feature space. To recap, the genre-space has been reduced from 164 to 70 and the feature space has been reduced from 518 to 155. 
 
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/kNNGenrePredictor_featAndLabelDimReduce.png "k-NN with reduced dimensional feature-space and genre-space")
 
+With this large reduction in the dimensionality of the problem, k-NN performs slightly worse at predicting the topics of the songs. This dataset has some genres that appear far more often than others. Even with topic modeling some of these genres are captured as topics. It is hard to train any classifier on the less common genres since there is little data. 
+
+The only way to mitigate this issue may be to do topic modeling with far fewer topics than 70 so we combine some genres together and hope that some less common genres are grouped with more common ones. 
 
 Repo under construction. 
