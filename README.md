@@ -116,6 +116,8 @@ To make the results more interpretable I also performed LDA with a preset of 70 
   '0.000*"Lounge" + 0.000*"Goth" + 0.000*"Black-Metal" + 0.000*"Big '
   'Band/Swing"')
   
-Since these topics are much more interpretable and LDA categorizes songs into fewer topics, I compressed the genre-space from 164 genres to 70 topics learned with LDA. 
+Since these topics are much more interpretable and LDA categorizes songs into fewer topics, I compressed the genre-space from 164 genres to 70 topics learned with LDA. Then I attempted k-NN prediction of topics for each song with the reduced dimensional feature space. To recap, the genre-space has been reduced from 164 to 70 and the feature space has been reduced from 518 to 155. 
+
+
 
 Repo under construction. 
