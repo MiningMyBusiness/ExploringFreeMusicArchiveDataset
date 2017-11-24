@@ -122,6 +122,6 @@ Since these topics are much more interpretable and LDA categorizes songs into fe
 
 With this large reduction in the dimensionality of the problem, k-NN performs slightly worse at predicting the topics of the songs. This dataset has some genres that appear far more often than others. Even with topic modeling some of these genres are captured as topics. It is hard to train any classifier on the less common genres since there is little data. 
 
-The only way to mitigate this issue may be to do topic modeling with far fewer topics than 70 so we combine some genres together and hope that some less common genres are grouped with more common ones. 
+The only way to mitigate this issue may be to do topic modeling with far fewer topics than 70 so we combine some genres together and hope that some less common genres are grouped with more common ones. With this grouping we will have a better chance of representing the less common genres without ignoring that data. 
 
 Repo under construction. 
