@@ -133,4 +133,4 @@ A deep neural net can perform non-linear dimensionality reduction of the feature
 
 Let's take Approach 1 first since it's simpler. 
 
-![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/DnnOutputThresJaccIndx_justClassifier.jpg "Jaccard index from thresholding output of the classifying neural network.")
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/DnnOuputThreshJaccIndx_justClassifier.jpg "Jaccard index from thresholding output of the classifying neural network.")
