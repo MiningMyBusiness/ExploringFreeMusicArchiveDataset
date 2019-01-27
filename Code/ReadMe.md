@@ -24,3 +24,9 @@ Implements a k-nearest neighbors classifier in tensorflow with full feature and 
 
 #### PredictGenre_NearestNeighbor_featDimReduce.py
 Implements a k-nearest neighbors classifier in tensorflow with dimensionally reduced feature space (with PCA) but full label space. 
+
+#### GenrePredicter_DNN_Keras.py
+First trains a deep encoder-decoder network to project song featuers into a latent dimensional space. Then uses the encoder portion of the network to build and train a classifier that attempts to classify song genres. 
+
+#### GenrePredictor_DNN_JustClassifier.py
+Builds and trains one neural network to take song featuers as input and generate predictions for the genre of the songs.
