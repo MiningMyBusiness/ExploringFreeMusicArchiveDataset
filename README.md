@@ -120,8 +120,17 @@ Since these topics are much more interpretable and LDA categorizes songs into fe
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/kNNGenrePredictor_featAndLabelDimReduce.png "k-NN with reduced dimensional feature-space and genre-space")
 
-With this large reduction in the dimensionality of the problem, k-NN performs slightly worse at predicting the topics of the songs. This dataset has some genres that appear far more often than others. Even with topic modeling some of these genres are captured as topics. It is hard to train any classifier on the less common genres since there is little data. 
+With this large reduction in the dimensionality of the problem, k-NN performs slightly worse at predicting the topics of the songs. This dataset has some genres that appear far more often than others. Even with topic modeling some of these genres are not captured as topics. It is hard to train any classifier on the less common genres since there is little data. 
 
-The only way to mitigate this issue may be to do topic modeling with far fewer topics than 70 so we combine some genres together and hope that some less common genres are grouped with more common ones. With this grouping we will have a better chance of representing the less common genres without ignoring that data. 
+But let's try a deep neural net (DNN) to classify the genre since DNNs can perform dimensionality reduction, manifold projections, and classification all at once. 
 
-Repo under construction. 
+### Deep neural net classifier 
+A deep neural net can perform non-linear dimensionality reduction of the feature space by encoding it in a latent dimensional space and use the encoding to classify the genre of the song. There are two ways to approach this problem. 
+
+1) We can build one deep neural net that takes the song features as input and directly outputs the genres of the song as the prediction. This neural net would have a loss function defined by the genres of the songs. It would be trained on the training set and validated on how well it predicted the genre of the testing set. 
+
+2) The other approach is to first build a deep encoder-decoder (autoencoder) network that can learn to represent the song features in a lower dimensional space and then reconstruct the songs from that space. The encoder-decoder net would have a loss function defined by the song features istelf because it's trying to reconstruct them. The encoder-decoder network would be trained on training set features and be validated on it's ability to reconstruct the test set features. Then we can take the encoder portion of the network and add layers to build a classifing neural net that uses the output of the encoder to predict the song genres which would have the genre labels of the song as the loss function. This network would be trained on the training set to predict genres and validated on the genres of the testing set. 
+
+Let's take Approach 1 first since it's simpler. 
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/DnnOutputThresJaccIndx_justClassifier.png "Jaccard index from thresholding output of the classifying neural network.")
