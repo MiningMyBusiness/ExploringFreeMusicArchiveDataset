@@ -137,4 +137,22 @@ Let's take [Approach 1](https://github.com/MiningMyBusiness/ExploringFreeMusicAr
 
 None of these Jaccard indices are better than the best one from the k-NN approach. Even with several different architectures, Approach 1 for deep neural net classification is not able to outperform the k-NN approach. 
 
-Let's then take a look at [Approach 2](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/blob/master/Code/GenrePredicter_DNN_Keras.py). Just as a reminder, in Approach 2 we first built an encoder-decoder network. The encoder compresses the features to a lower dimensional space and the decoder reconstructs features by projecting them back to the higher dimensional space. 
+Let's then take a look at [Approach 2](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/blob/master/Code/GenrePredicter_DNN_Keras.py). Just as a reminder, in Approach 2 we first built an encoder-decoder network. The encoder compresses the features to a lower dimensional space and the decoder reconstructs features by projecting them back to the higher dimensional space. Then the encoder is used as the bottom layers of a classifier network. The output of the classifier network in Approach 2 is similar to the output in Approach 1. Please take a look at the code for more details about the architecture of the networks.
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/DnnOuputThreshJaccIndx.jpg "Jaccard index from thresholding output of the encoding-classifying neural network.")
+
+Clearly, Approach 2 is outperforming Approach 1. This specific result was achieved by encoding the features into a 164 dimensional space and then using that encoding to train the classifier. Here are the accuracies for each genre for the encoding classifier for the threshold with the highest Jaccard index. 
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/AccuracyGenre.jpg "Accuracy per genre of the encoding-classifying neural network.")
+
+Without any additional information, this looks pretty good. Most accuracies are near 1 with a few dipping below 0.9. 
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/AccLessThan90.jpg "Genres with less than 90% accuracy from the encoding-classifying neural network.")
+
+However, accuracy may not be the best measure here due to the huge amount of class imbalance. Additionally, please note here that many of the classes with less than 90% accuracy are also the classes that have the most instances in the dataset. Let's take a look at precision and recall in addition to accuracy for each genre to get a better idea of good the classifier is. 
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/AccVsPres.jpg "Accuracy vs. Precision from the encoding-classifying neural network.")
+
+![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/AccVsRecall.jpg "Accuracy vs. Recall from the encoding-classifying neural network.")
+
+Recall and precision were both less than 80% for the large majority of genres. This suggests that the classifier is deeply affected during training by class imbalance. In this case, a classifier can maintain a high average accuracy across genres of nearly 98% while having low average precision and recall. 
