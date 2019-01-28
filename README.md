@@ -131,6 +131,10 @@ A deep neural net can perform non-linear dimensionality reduction of the feature
 
 2) The other approach is to first build a deep encoder-decoder (autoencoder) network that can learn to represent the song features in a lower dimensional space and then reconstruct the songs from that space. The encoder-decoder net would have a loss function defined by the song features istelf because it's trying to reconstruct them. The encoder-decoder network would be trained on training set features and be validated on it's ability to reconstruct the test set features. Then we can take the encoder portion of the network and add layers to build a classifing neural net that uses the output of the encoder to predict the song genres which would have the genre labels of the song as the loss function. This network would be trained on the training set to predict genres and validated on the genres of the testing set. 
 
-Let's take Approach 1 first since it's simpler. 
+Let's take [Approach 1](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/blob/master/Code/GenrePredictor_DNN_JustClassifier.py) first since it's simpler. The output of layer of the neural net has 164 neurons (one for each genre) which output a number between 0 to 1. We can test different binary thresholds on this output to see which produces the best Jaccard index. Please take a look at the code for more details about the architecture of the network.
 
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/DnnOuputThreshJaccIndx_justClassifier.jpg "Jaccard index from thresholding output of the classifying neural network.")
+
+None of these Jaccard indices are better than the best one from the k-NN approach. Even with several different architectures, Approach 1 for deep neural net classification is not able to outperform the k-NN approach. 
+
+Let's then take a look at [Approach 2](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/blob/master/Code/GenrePredicter_DNN_Keras.py). Just as a reminder, in Approach 2 we first built an encoder-decoder network. The encoder compresses the features to a lower dimensional space and the decoder reconstructs features by projecting them back to the higher dimensional space. 
