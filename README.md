@@ -156,3 +156,6 @@ However, accuracy may not be the best measure here due to the huge amount of cla
 ![alt text](https://github.com/MiningMyBusiness/ExploringFreeMusicArchiveDataset/raw/master/Figures/AccVsRecall.jpg "Accuracy vs. Recall from the encoding-classifying neural network.")
 
 Recall and precision were both less than 80% for the large majority of genres. This suggests that the classifier is deeply affected during training by class imbalance. In this case, a classifier can maintain a high average accuracy across genres of nearly 98% while having low average precision and recall. 
+
+## Conclusions
+A classifier can be trained on this dataset to achieve great accuracy but is heavily influenced by the class imbalance of the dataset. The precision and recall of the classifier is very bad on the genres with fewer instances. It's unclear if the class imbalance in this dataset is representative of the imbalance in genres of digital music content in general. However, if this is the case, it may be better to train many binary classifiers - one for each genre. These classifiers can be trained on balanced counts of each genre against all other genres. Regardless, this analysis does show that the features extracted from the audio signal can be represented in a lower dimensional space without losing the information needed for classification. 
